@@ -245,6 +245,7 @@ class ViewController: UIViewController {
             button.layer.borderWidth = 1
             if display[buttontag-1] != 0{
                 button.setTitle(String(display[buttontag-1]), for: .normal)
+                
                 button.setTitleColor(UIColor.blue,for: .normal)
             }
             button.tag=buttontag
