@@ -74,6 +74,12 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pig" translatesAutoresizingMaskIntoConstraints="NO" id="DoN-lP-ojv">
+                                <rect key="frame" x="87" y="184" width="240" height="414"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="DoN-lP-ojv" secondAttribute="height" multiplier="40:69" id="lEx-D7-ftW"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g9j-l0-BKP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -81,8 +87,11 @@
                             <constraint firstItem="g9j-l0-BKP" firstAttribute="bottom" secondItem="52P-Bm-G75" secondAttribute="bottom" constant="100" id="3MC-WF-fql"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="centerX" secondItem="hfZ-o0-Twq" secondAttribute="centerX" id="83m-hH-aZ6"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="top" secondItem="g9j-l0-BKP" secondAttribute="top" constant="80" id="DRP-8c-YWb"/>
+                            <constraint firstItem="DoN-lP-ojv" firstAttribute="centerX" secondItem="hfZ-o0-Twq" secondAttribute="centerX" id="LU1-Wg-mge"/>
                             <constraint firstItem="52P-Bm-G75" firstAttribute="leading" secondItem="iac-PS-yiB" secondAttribute="leading" id="QG4-ps-YHO"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="trailing" secondItem="52P-Bm-G75" secondAttribute="trailing" id="eo3-gk-CGo"/>
+                            <constraint firstItem="DoN-lP-ojv" firstAttribute="top" secondItem="iac-PS-yiB" secondAttribute="bottom" constant="20" id="qfW-tY-paL"/>
+                            <constraint firstItem="52P-Bm-G75" firstAttribute="top" secondItem="DoN-lP-ojv" secondAttribute="bottom" constant="20" id="uBT-tx-Ges"/>
                         </constraints>
                     </view>
                     <connections>
@@ -311,6 +320,7 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="pig" width="748" height="1198"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
