@@ -29,6 +29,7 @@ class GamePadCell: UICollectionViewCell {
             case .wrong:
                 button.setTitleColor(UIColor.red, for: .normal)
             case .empty:
+                displayedNum = 0
                 button.setTitleColor(UIColor.systemOrange, for: .normal)
                 button.setTitle("", for: .normal)
             case .filled:
@@ -39,7 +40,9 @@ class GamePadCell: UICollectionViewCell {
     
     var displayedNum: Int = 0 {
         didSet {
-            button.setTitle(String(displayedNum), for: .normal)
+            if displayedNum != 0 {
+                button.setTitle(String(displayedNum), for: .normal)
+            }
         }
     }
     

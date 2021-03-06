@@ -19,6 +19,19 @@ class NumPadCell: UICollectionViewCell {
         }
     }
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                backgroundColor = UIColor(red: 238/255, green: 1, blue: 148/255, alpha: 1)//EEFF94
+                button.setTitleColor(UIColor.systemOrange, for: .normal)
+            }
+            else {
+                backgroundColor = UIColor.systemOrange
+                button.setTitleColor(UIColor(red: 238/255, green: 1, blue: 148/255, alpha: 1), for: .normal)
+            }
+        }
+    }
+    
     func configureViews() {
         layer.cornerRadius = 2
     }

@@ -32,7 +32,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1h-lD-vKK">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.94953205730000001" green="1" blue="0.63155346000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.93512028459999996" green="1" blue="0.58030807969999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="ghW-a0-Xen"/>
                                         </constraints>
@@ -46,7 +46,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9M-Zj-YL3">
                                         <rect key="frame" x="0.0" y="52" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.94953205730000001" green="1" blue="0.63155346000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.93333333333333335" green="1" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="gsQ-1f-yrq"/>
                                         </constraints>
@@ -60,7 +60,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFo-EY-nqC">
                                         <rect key="frame" x="0.0" y="104" width="200" height="40"/>
-                                        <color key="backgroundColor" red="0.94953205730000001" green="1" blue="0.63155346000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.93512028459999996" green="1" blue="0.58030807969999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="WIe-ls-D0j"/>
                                         </constraints>
@@ -168,7 +168,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2K6-Wb-pqR">
                                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                                     <state key="normal">
-                                                        <color key="titleColor" red="0.94953205730000001" green="1" blue="0.63155346000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="titleColor" red="0.93333333333333335" green="1" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="selectNumPad:" destination="E6A-cu-Prj" eventType="touchUpInside" id="r2q-zI-fD6"/>
@@ -242,7 +242,7 @@
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X62-8I-YhD">
                                 <rect key="frame" x="132" y="655" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.94953205730000001" green="1" blue="0.63155346000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.93333333333333335" green="1" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ql6-Bm-aQy"/>
                                     <constraint firstAttribute="width" constant="150" id="eFA-WO-Rgg"/>

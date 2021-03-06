@@ -80,7 +80,7 @@ class GameDataManager {
         }
     }
     
-    func checkAll(place: Int) -> Bool {
+    func checkForPlacement(place: Int) -> Bool {
         let i = place / 9
         let j = place % 9
         
