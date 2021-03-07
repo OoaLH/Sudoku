@@ -82,7 +82,7 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g9j-l0-BKP"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="g9j-l0-BKP" firstAttribute="bottom" secondItem="52P-Bm-G75" secondAttribute="bottom" constant="100" id="3MC-WF-fql"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="centerX" secondItem="hfZ-o0-Twq" secondAttribute="centerX" id="83m-hH-aZ6"/>
@@ -204,7 +204,7 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Npr-WP-mpn">
-                                <rect key="frame" x="20" y="274.5" width="374" height="374"/>
+                                <rect key="frame" x="20" y="261" width="374" height="374"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Npr-WP-mpn" secondAttribute="height" multiplier="1:1" id="6jE-jv-xYF"/>
@@ -265,13 +265,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtO-cC-nfp">
-                                <rect key="frame" x="132" y="214.5" width="150" height="40"/>
+                                <rect key="frame" x="132" y="160" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Fgm-8l-aIF"/>
                                     <constraint firstAttribute="width" constant="150" id="zl1-or-efS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unl-fw-rKF">
@@ -286,6 +286,12 @@
                                     <action selector="back:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oji-PR-dkd"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-w9-uQn">
+                                <rect key="frame" x="189.5" y="220" width="35.5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemOrangeColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -293,16 +299,18 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Npr-WP-mpn" secondAttribute="trailing" constant="20" id="0Dc-EY-rRy"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0c2-fZ-Dzp"/>
                             <constraint firstItem="unl-fw-rKF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Fs-ke-GlB"/>
+                            <constraint firstItem="dc9-w9-uQn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="A4r-QY-9Dw"/>
+                            <constraint firstItem="Npr-WP-mpn" firstAttribute="top" secondItem="dc9-w9-uQn" secondAttribute="bottom" constant="20" id="CVl-fk-AuV"/>
                             <constraint firstItem="X62-8I-YhD" firstAttribute="bottom" secondItem="YLv-30-FDh" secondAttribute="top" constant="-20" id="DeH-f9-TWm"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L1V-gP-UeE"/>
                             <constraint firstItem="unl-fw-rKF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XSu-PQ-gKT"/>
                             <constraint firstItem="XtO-cC-nfp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xz8-9z-9Ht"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YLv-30-FDh" secondAttribute="bottom" constant="12" id="bti-bX-6iY"/>
-                            <constraint firstItem="Npr-WP-mpn" firstAttribute="top" secondItem="XtO-cC-nfp" secondAttribute="bottom" constant="20" id="glY-vu-sB4"/>
+                            <constraint firstItem="Npr-WP-mpn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eG3-hl-DAJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YLv-30-FDh" secondAttribute="trailing" constant="20" id="hd3-vG-3zl"/>
                             <constraint firstItem="YLv-30-FDh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iwT-Jz-vSv"/>
                             <constraint firstItem="X62-8I-YhD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="plD-VZ-jui"/>
-                            <constraint firstItem="X62-8I-YhD" firstAttribute="top" secondItem="Npr-WP-mpn" secondAttribute="bottom" constant="100" id="qxc-b0-icJ"/>
+                            <constraint firstItem="dc9-w9-uQn" firstAttribute="top" secondItem="XtO-cC-nfp" secondAttribute="bottom" constant="20" id="t00-lX-Eec"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="TtY-Jh-WmH"/>
@@ -311,6 +319,7 @@
                         <outlet property="numPad" destination="YLv-30-FDh" id="tA5-Kc-6OF"/>
                         <outlet property="startButton" destination="X62-8I-YhD" id="wAC-Zg-8uj"/>
                         <outlet property="textLabel" destination="XtO-cC-nfp" id="diE-LR-yWd"/>
+                        <outlet property="timerLabel" destination="dc9-w9-uQn" id="vuK-dT-WlF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

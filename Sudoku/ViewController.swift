@@ -12,10 +12,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var numPad: UICollectionView!
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var timerLabel: UILabel!
     let row1 = UIView()
     let row2 = UIView()
     let line1 = UIView()
     let line2 = UIView()
+    var timer: Timer?
+    var time: TimeInterval = 0 {
+        didSet {
+            var second = String(Int(time)%60)
+            if Int(time)%60 < 10 {
+                second = "0" + second
+            }
+            timerLabel.text = String(Int(time/60)) + ":" + second
+        }
+    }
     var selectedGamePadIndex: Int?
     var selectedNumPadIndex: Int?
     var wrongTime: Int = 0 {
@@ -64,20 +75,26 @@ class ViewController: UIViewController {
     }
     
     func start() {
+        timer?.invalidate()
+        time = 0
         GameDataManager.shared.refreshData()
         GameDataManager.shared.generateData()
         wrongTime = 0
         gamePad.reloadData()
         numPad.reloadData()
-        textLabel.text = "Start!"
-        textLabel.textColor = UIColor.systemOrange
+        textLabel.text = "Started!"
+        textLabel.textColor = UIColor.systemGreen
         gamePad.isUserInteractionEnabled = true
         numPad.isUserInteractionEnabled = true
         selectedGamePadIndex = nil
         selectedNumPadIndex = nil
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: {[weak self] (timer) in
+            self?.time += 1
+        })
     }
     
     func win() {
+        timer?.invalidate()
         textLabel.text = "You win!"
         textLabel.textColor = UIColor.red
         gamePad.isUserInteractionEnabled = false
@@ -85,6 +102,7 @@ class ViewController: UIViewController {
     }
     
     func lose() {
+        timer?.invalidate()
         textLabel.text = "You lose!"
         textLabel.textColor = UIColor.red
         gamePad.isUserInteractionEnabled = false
@@ -178,6 +196,7 @@ extension ViewController: NumPadCellDelegate {
             numPad.cellForItem(at: IndexPath(row: oldNumPadIndex, section: 0))?.isSelected = false
             if oldNumPadIndex == num - 1 {
                 cell.status = .empty
+                GameDataManager.shared.emptyNum += 1
                 selectedNumPadIndex = nil
                 return
             }
