@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GameKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var gamePad: UICollectionView!
@@ -99,6 +100,15 @@ class ViewController: UIViewController {
         textLabel.textColor = UIColor.red
         gamePad.isUserInteractionEnabled = false
         numPad.isUserInteractionEnabled = false
+        
+        let alert = UIAlertController(title: "You win!", message: "Upload your record now!", preferredStyle: .alert)
+        let upload = UIAlertAction(title: "upload", style: .default) {[unowned self] _ in
+            self.uploadScore()
+        }
+        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
+        alert.addAction(upload)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
     }
     
     func lose() {
@@ -107,6 +117,36 @@ class ViewController: UIViewController {
         textLabel.textColor = UIColor.red
         gamePad.isUserInteractionEnabled = false
         numPad.isUserInteractionEnabled = false
+    }
+    
+    func uploadScore() {
+        if !NetworkReachability.isConnectedToNetwork() {
+            let alert = UIAlertController(title: "No Internet Connection", message: "Please connect to Internet to upload your score.", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(ok)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        let currentTime = time
+        if GKLocalPlayer.local.isAuthenticated {
+            GKLeaderboard.submitScore(Int(currentTime), context: 0, player: GKLocalPlayer.local,
+                                      leaderboardIDs: ["best_time"]) { error in
+            }
+        }
+        else {
+            GKLocalPlayer.local.authenticateHandler = { [unowned self] viewController, error in
+                if let viewController = viewController {
+                    self.present(viewController, animated: true, completion: nil)
+                    return
+                }
+                if error != nil {
+                    return
+                }
+                GKLeaderboard.submitScore(Int(currentTime), context: 0, player: GKLocalPlayer.local,
+                                          leaderboardIDs: ["best_time"]) { error in
+                }
+            }
+        }
     }
     
     @IBAction func newRound(_ sender: UIButton) {
@@ -197,6 +237,7 @@ extension ViewController: NumPadCellDelegate {
             if oldNumPadIndex == num - 1 {
                 cell.status = .empty
                 GameDataManager.shared.emptyNum += 1
+                GameDataManager.shared.shouldDisplay[index] = 0
                 selectedNumPadIndex = nil
                 return
             }
@@ -243,5 +284,11 @@ extension ViewController: NumPadCellDelegate {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
         }
+    }
+}
+
+extension ViewController: GKGameCenterControllerDelegate {
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

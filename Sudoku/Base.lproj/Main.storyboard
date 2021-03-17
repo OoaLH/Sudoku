@@ -23,12 +23,12 @@
                                     <constraint firstAttribute="width" constant="200" id="n0Z-Ke-YEr"/>
                                     <constraint firstAttribute="height" constant="40" id="yDx-R9-jn8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="40"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="52P-Bm-G75">
-                                <rect key="frame" x="107" y="618" width="200" height="144"/>
+                                <rect key="frame" x="107" y="626" width="200" height="196"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1h-lD-vKK">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
@@ -58,8 +58,22 @@
                                             <segue destination="J7s-m5-mzv" kind="show" id="Udp-Ns-Cgm"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFo-EY-nqC">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLl-nj-Hke">
                                         <rect key="frame" x="0.0" y="104" width="200" height="40"/>
+                                        <color key="backgroundColor" red="0.93333333330000001" green="1" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="xsI-wZ-s7O"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <state key="normal" title="Leaderboard">
+                                            <color key="titleColor" systemColor="systemOrangeColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showBoard:" destination="cJN-gP-xtA" eventType="touchUpInside" id="9Fl-U9-bx2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFo-EY-nqC">
+                                        <rect key="frame" x="0.0" y="156" width="200" height="40"/>
                                         <color key="backgroundColor" red="0.93512028459999996" green="1" blue="0.58030807969999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="WIe-ls-D0j"/>
@@ -75,28 +89,39 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pig" translatesAutoresizingMaskIntoConstraints="NO" id="DoN-lP-ojv">
-                                <rect key="frame" x="87" y="184" width="240" height="414"/>
+                                <rect key="frame" x="84.5" y="184" width="245" height="422"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DoN-lP-ojv" secondAttribute="height" multiplier="40:69" id="lEx-D7-ftW"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="vjb-a8-bMG">
+                                <rect key="frame" x="169.5" y="410.5" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="GRP-Ff-Ew4"/>
+                                    <constraint firstAttribute="width" constant="75" id="fGH-ek-QpW"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="g9j-l0-BKP"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="g9j-l0-BKP" firstAttribute="bottom" secondItem="52P-Bm-G75" secondAttribute="bottom" constant="100" id="3MC-WF-fql"/>
+                            <constraint firstItem="g9j-l0-BKP" firstAttribute="bottom" secondItem="52P-Bm-G75" secondAttribute="bottom" constant="40" id="3MC-WF-fql"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="centerX" secondItem="hfZ-o0-Twq" secondAttribute="centerX" id="83m-hH-aZ6"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="top" secondItem="g9j-l0-BKP" secondAttribute="top" constant="80" id="DRP-8c-YWb"/>
                             <constraint firstItem="DoN-lP-ojv" firstAttribute="centerX" secondItem="hfZ-o0-Twq" secondAttribute="centerX" id="LU1-Wg-mge"/>
                             <constraint firstItem="52P-Bm-G75" firstAttribute="leading" secondItem="iac-PS-yiB" secondAttribute="leading" id="QG4-ps-YHO"/>
+                            <constraint firstItem="vjb-a8-bMG" firstAttribute="centerX" secondItem="hfZ-o0-Twq" secondAttribute="centerX" id="amc-mv-Jdb"/>
                             <constraint firstItem="iac-PS-yiB" firstAttribute="trailing" secondItem="52P-Bm-G75" secondAttribute="trailing" id="eo3-gk-CGo"/>
                             <constraint firstItem="DoN-lP-ojv" firstAttribute="top" secondItem="iac-PS-yiB" secondAttribute="bottom" constant="20" id="qfW-tY-paL"/>
                             <constraint firstItem="52P-Bm-G75" firstAttribute="top" secondItem="DoN-lP-ojv" secondAttribute="bottom" constant="20" id="uBT-tx-Ges"/>
+                            <constraint firstItem="vjb-a8-bMG" firstAttribute="centerY" secondItem="hfZ-o0-Twq" secondAttribute="centerY" id="zpJ-ty-cx5"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="aboutButton" destination="FFo-EY-nqC" id="I0m-Vp-XpV"/>
                         <outlet property="instructionButton" destination="W9M-Zj-YL3" id="kwR-41-Rxd"/>
+                        <outlet property="leaderBoardButton" destination="BLl-nj-Hke" id="jfO-s5-q96"/>
+                        <outlet property="spinView" destination="vjb-a8-bMG" id="sNB-jE-Gwe"/>
                         <outlet property="startButton" destination="w1h-lD-vKK" id="zCh-lg-Ttl"/>
                     </connections>
                 </viewController>
