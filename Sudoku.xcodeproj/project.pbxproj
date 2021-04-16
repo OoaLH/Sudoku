@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A40EE70C260226F3008306C6 /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40EE70B260226F3008306C6 /* NetworkReachability.swift */; };
+		A43C76C12605B4DC00DC6501 /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43C76C02605B4DC00DC6501 /* GameConstants.swift */; };
 		A45D274625EA316300FBFABA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D274525EA316300FBFABA /* HomeViewController.swift */; };
 		A45D274B25EA323200FBFABA /* InstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45D274A25EA323200FBFABA /* InstructionViewController.swift */; };
 		A49AFF1425E7FF6C00DDD3C6 /* GameDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A49AFF1325E7FF6C00DDD3C6 /* GameDataManager.swift */; };
@@ -23,6 +24,7 @@
 		A4AA5F8625D2E41600EB0219 /* GamePadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA5F8525D2E41600EB0219 /* GamePadCell.swift */; };
 		A4AA5F8B25D2E42000EB0219 /* NumPadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA5F8A25D2E42000EB0219 /* NumPadCell.swift */; };
 		A4ADBE6825FF631000181EF5 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4ADBE6725FF631000181EF5 /* GameKit.framework */; };
+		A4CB4F2C2605FD7F00C23D82 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CB4F2B2605FD7F00C23D82 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		A40EE70B260226F3008306C6 /* NetworkReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		A43C76C02605B4DC00DC6501 /* GameConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
 		A45D274525EA316300FBFABA /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A45D274A25EA323200FBFABA /* InstructionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionViewController.swift; sourceTree = "<group>"; };
 		A49AFF1325E7FF6C00DDD3C6 /* GameDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataManager.swift; sourceTree = "<group>"; };
@@ -65,6 +68,8 @@
 		A4AA5F8525D2E41600EB0219 /* GamePadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePadCell.swift; sourceTree = "<group>"; };
 		A4AA5F8A25D2E42000EB0219 /* NumPadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumPadCell.swift; sourceTree = "<group>"; };
 		A4ADBE6725FF631000181EF5 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		A4CB4F272605FD7700C23D82 /* Sudoku.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sudoku.entitlements; sourceTree = "<group>"; };
+		A4CB4F2B2605FD7F00C23D82 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4ADBE6825FF631000181EF5 /* GameKit.framework in Frameworks */,
+				A4CB4F2C2605FD7F00C23D82 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,10 +123,12 @@
 		A4AA5F4625D2DF4D00EB0219 /* Sudoku */ = {
 			isa = PBXGroup;
 			children = (
+				A4CB4F272605FD7700C23D82 /* Sudoku.entitlements */,
 				A4AA5F4725D2DF4D00EB0219 /* AppDelegate.swift */,
 				A4AA5F4925D2DF4D00EB0219 /* SceneDelegate.swift */,
 				A4AA5F8525D2E41600EB0219 /* GamePadCell.swift */,
 				A49AFF1325E7FF6C00DDD3C6 /* GameDataManager.swift */,
+				A43C76C02605B4DC00DC6501 /* GameConstants.swift */,
 				A4AA5F8A25D2E42000EB0219 /* NumPadCell.swift */,
 				A4AA5F4B25D2DF4D00EB0219 /* ViewController.swift */,
 				A45D274525EA316300FBFABA /* HomeViewController.swift */,
@@ -156,6 +164,7 @@
 		A4ADBE6625FF631000181EF5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4CB4F2B2605FD7F00C23D82 /* CloudKit.framework */,
 				A4ADBE6725FF631000181EF5 /* GameKit.framework */,
 			);
 			name = Frameworks;
@@ -298,6 +307,7 @@
 				A45D274625EA316300FBFABA /* HomeViewController.swift in Sources */,
 				A4AA5F4825D2DF4D00EB0219 /* AppDelegate.swift in Sources */,
 				A4AA5F5225D2DF4D00EB0219 /* Sudoku.xcdatamodeld in Sources */,
+				A43C76C12605B4DC00DC6501 /* GameConstants.swift in Sources */,
 				A4AA5F8625D2E41600EB0219 /* GamePadCell.swift in Sources */,
 				A4AA5F4A25D2DF4D00EB0219 /* SceneDelegate.swift in Sources */,
 				A40EE70C260226F3008306C6 /* NetworkReachability.swift in Sources */,
@@ -476,15 +486,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sudoku/Sudoku.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 2VBCC3QCHE;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = zhangyifan.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -497,15 +508,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Sudoku/Sudoku.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 2VBCC3QCHE;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = zhangyifan.Sudoku;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -9,7 +9,6 @@ import Foundation
 
 class GameDataManager {
     static let shared = GameDataManager()
-    var number = [6,3,7,1,5,8,4,2,9,4,2,5,6,7,9,1,3,8,8,9,1,2,3,4,6,5,7,2      ,6,4,9,8,5,3,7,1,5,7,8,3,6,1,9,4,2,3,1,9,4,2,7,5,8,6,7,4,6,8,1,3,2,9,5,9,5,2,7,4,6,8,1,3,1,8,3,5,9,2,7,6,4]
     var collection = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     var mapToCollection = Array(repeating: 0, count: 9)
     var shouldDisplay = Array(repeating: 0, count: 81)
@@ -18,14 +17,15 @@ class GameDataManager {
     private init() {}
     
     func refreshData() {
-        number = [6,3,7,1,5,8,4,2,9,4,2,5,6,7,9,1,3,8,8,9,1,2,3,4,6,5,7,2      ,6,4,9,8,5,3,7,1,5,7,8,3,6,1,9,4,2,3,1,9,4,2,7,5,8,6,7,4,6,8,1,3,2,9,5,9,5,2,7,4,6,8,1,3,1,8,3,5,9,2,7,6,4]
         collection = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         mapToCollection = Array(repeating: 0, count: 9)
-        shouldDisplay = Array(repeating: 0, count: 81)
         emptyNum = 81
     }
     
     func generateData() {
+        let random = Int(arc4random_uniform(UInt32(number.count)))
+        shouldDisplay = number[random]
+        
         for i in 0..<9 {
             let num = Int(arc4random_uniform(UInt32(9 - i)))
             mapToCollection[i] = collection[num]
@@ -33,51 +33,70 @@ class GameDataManager {
         }
         
         for i in 0..<81 {
-            number[i] = mapToCollection[number[i] - 1]
-        }
-        var row1 = Int(arc4random_uniform(2) + 4)
-        var row2 = Int(arc4random_uniform(2) + 4)
-        var line1 = Int(arc4random_uniform(2) + 4)
-        var line2 = Int(arc4random_uniform(2) + 4)
-        converseRow(row1: row1, row2: row2)
-        converseLine(line1: line1, line2: line2)
-        row1 = Int(arc4random_uniform(2) + 1)
-        row2 = Int(arc4random_uniform(2) + 1)
-        line1 = Int(arc4random_uniform(2) + 1)
-        line2 = Int(arc4random_uniform(2) + 1)
-        converseRow(row1: row1, row2: row2)
-        converseLine(line1: line1, line2: line2)
-        row1 = Int(arc4random_uniform(2) + 7)
-        row2 = Int(arc4random_uniform(2) + 7)
-        line1 = Int(arc4random_uniform(2) + 7)
-        line2 = Int(arc4random_uniform(2) + 7)
-        converseRow(row1: row1, row2: row2)
-        converseLine(line1: line1, line2: line2)
-        
-        for i in 0..<81 {
-            let k = Int(arc4random_uniform(2))
-            if k == 0 {
-                shouldDisplay[i] = number[i]
+            if shouldDisplay[i] != 0 {
+                shouldDisplay[i] = mapToCollection[shouldDisplay[i] - 1]
                 emptyNum -= 1
             }
+            else {
+                if Int(arc4random_uniform(UInt32(81))) < 5 {
+                    shouldDisplay[i] = mapToCollection[solution[i] - 1]
+                    emptyNum -= 1
+                }
+            }
         }
+        var row1 = Int(arc4random_uniform(3) + 3)
+        var row2 = Int(arc4random_uniform(3) + 3)
+        var line1 = Int(arc4random_uniform(3) + 3)
+        var line2 = Int(arc4random_uniform(3) + 3)
+        converseRow(row1: row1, row2: row2)
+        converseLine(line1: line1, line2: line2)
+        row1 = Int(arc4random_uniform(3))
+        row2 = Int(arc4random_uniform(3))
+        line1 = Int(arc4random_uniform(3))
+        line2 = Int(arc4random_uniform(3))
+        converseRow(row1: row1, row2: row2)
+        converseLine(line1: line1, line2: line2)
+        row1 = Int(arc4random_uniform(3) + 6)
+        row2 = Int(arc4random_uniform(3) + 6)
+        line1 = Int(arc4random_uniform(3) + 6)
+        line2 = Int(arc4random_uniform(3) + 6)
+        converseRow(row1: row1, row2: row2)
+        converseLine(line1: line1, line2: line2)
+        row1 = Int(arc4random_uniform(3))
+        row2 = Int(arc4random_uniform(3))
+        line1 = Int(arc4random_uniform(3))
+        line2 = Int(arc4random_uniform(3))
+        converseBlockInLine(line1: line1, line2: line2)
+        converseBlockInRow(row1: row1, row2: row2)
     }
     
     func converseRow(row1: Int, row2: Int) {
-        for i in (row1 - 1) * 9..<(row1 - 1) * 9 + 9 {
+        for i in row1 * 9..<row1 * 9 + 9 {
             let j = i + (row2 - row1) * 9
-            let k = number[i]
-            number[i] = number[j]
-            number[j] = k
+            let k = shouldDisplay[i]
+            shouldDisplay[i] = shouldDisplay[j]
+            shouldDisplay[j] = k
         }
     }
     
     func converseLine(line1: Int, line2: Int) {
         for i in 0..<9 {
-            let k = number[i * 9 + line1]
-            number[i * 9 + line1] = number[i * 9 + line2]
-            number[i * 9 + line2] = k
+            let k = shouldDisplay[i * 9 + line1]
+            shouldDisplay[i * 9 + line1] = shouldDisplay[i * 9 + line2]
+            shouldDisplay[i * 9 + line2] = k
         }
+    }
+    
+    func converseBlockInLine(line1: Int, line2: Int) {
+        converseLine(line1: 3 * line1 + 1, line2: 3 * line2 + 1)
+        converseLine(line1: 3 * line1 + 2, line2: 3 * line2 + 2)
+        converseLine(line1: 3 * line1, line2: 3 * line2)
+    }
+    
+    func converseBlockInRow(row1: Int, row2: Int) {
+        converseRow(row1: 3 * row1 + 1, row2: 3 * row2 + 1)
+        converseRow(row1: 3 * row1 + 2, row2: 3 * row2 + 2)
+        converseRow(row1: 3 * row1, row2: 3 * row2)
     }
     
     func checkForPlacement(place: Int) -> Bool {
