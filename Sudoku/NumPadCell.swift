@@ -7,12 +7,13 @@
 
 import UIKit
 
-protocol NumPadCellDelegate: class {
+protocol NumPadCellDelegate: AnyObject {
     func fillNum(num: Int)
 }
 
 class NumPadCell: UICollectionViewCell {
     weak var delegate: NumPadCellDelegate?
+    
     var displayedNum: Int = 0 {
         didSet {
             button.setTitle(String(displayedNum), for: .normal)
@@ -24,8 +25,7 @@ class NumPadCell: UICollectionViewCell {
             if isSelected {
                 backgroundColor = UIColor(red: 238/255, green: 1, blue: 148/255, alpha: 1)//EEFF94
                 button.setTitleColor(UIColor.systemOrange, for: .normal)
-            }
-            else {
+            } else {
                 backgroundColor = UIColor.systemOrange
                 button.setTitleColor(UIColor(red: 238/255, green: 1, blue: 148/255, alpha: 1), for: .normal)
             }

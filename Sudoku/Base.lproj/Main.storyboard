@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cJN-gP-xtA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cJN-gP-xtA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -51,12 +52,9 @@
                                             <constraint firstAttribute="height" constant="40" id="gsQ-1f-yrq"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <state key="normal" title="How to play">
+                                        <state key="normal" title="Daily Challenge">
                                             <color key="titleColor" systemColor="systemOrangeColor"/>
                                         </state>
-                                        <connections>
-                                            <segue destination="J7s-m5-mzv" kind="show" id="Udp-Ns-Cgm"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BLl-nj-Hke">
                                         <rect key="frame" x="0.0" y="104" width="200" height="40"/>
@@ -128,48 +126,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sE4-Nr-fdV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-729" y="94"/>
-        </scene>
-        <!--Instruction View Controller-->
-        <scene sceneID="NV8-7C-taR">
-            <objects>
-                <viewController id="J7s-m5-mzv" customClass="InstructionViewController" customModule="Sudoku" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jIB-Gv-vVQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkx-hy-Lje">
-                                <rect key="frame" x="20" y="20" width="172" height="41"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                <color key="textColor" systemColor="systemGreenColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CI1-kH-c2U">
-                                <rect key="frame" x="20" y="81" width="374" height="707"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="textColor" systemColor="systemOrangeColor"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="dES-qu-hy0"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="CI1-kH-c2U" firstAttribute="leading" secondItem="dES-qu-hy0" secondAttribute="leading" constant="20" id="K0C-up-loY"/>
-                            <constraint firstItem="lkx-hy-Lje" firstAttribute="top" secondItem="dES-qu-hy0" secondAttribute="top" constant="20" id="MeO-qp-eRd"/>
-                            <constraint firstItem="CI1-kH-c2U" firstAttribute="top" secondItem="lkx-hy-Lje" secondAttribute="bottom" constant="20" id="jPH-PW-kQV"/>
-                            <constraint firstItem="lkx-hy-Lje" firstAttribute="leading" secondItem="dES-qu-hy0" secondAttribute="leading" constant="20" id="mdY-zw-n50"/>
-                            <constraint firstItem="dES-qu-hy0" firstAttribute="trailing" secondItem="CI1-kH-c2U" secondAttribute="trailing" constant="20" id="nbb-WC-Hdt"/>
-                            <constraint firstItem="dES-qu-hy0" firstAttribute="bottom" secondItem="CI1-kH-c2U" secondAttribute="bottom" constant="20" id="rJ1-XU-1Cx"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="lJt-cz-lQI"/>
-                    <connections>
-                        <outlet property="instruction" destination="CI1-kH-c2U" id="asi-o2-ver"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h9d-0S-oHs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-730" y="767"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -254,18 +210,31 @@
                                                         <action selector="selectGamePad:" destination="zyD-aE-f9L" eventType="touchUpInside" id="zQK-50-ngC"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWq-5O-SU7">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="xdN-Ba-0Ae"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="zoR-Fz-c3o" secondAttribute="trailing" id="78R-JG-SNd"/>
                                                 <constraint firstItem="zoR-Fz-c3o" firstAttribute="leading" secondItem="QzT-RR-87D" secondAttribute="leading" id="Ah8-sI-VUr"/>
                                                 <constraint firstItem="zoR-Fz-c3o" firstAttribute="top" secondItem="QzT-RR-87D" secondAttribute="top" id="H5U-jz-1r6"/>
+                                                <constraint firstItem="cWq-5O-SU7" firstAttribute="top" secondItem="QzT-RR-87D" secondAttribute="top" id="pLE-iA-sRG"/>
+                                                <constraint firstItem="cWq-5O-SU7" firstAttribute="leading" secondItem="QzT-RR-87D" secondAttribute="leading" id="rmo-0e-WST"/>
                                                 <constraint firstAttribute="bottom" secondItem="zoR-Fz-c3o" secondAttribute="bottom" id="uV5-Hw-Pri"/>
+                                                <constraint firstItem="cWq-5O-SU7" firstAttribute="centerX" secondItem="QzT-RR-87D" secondAttribute="centerX" id="xrb-rL-jDZ"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="button" destination="zoR-Fz-c3o" id="n18-qa-Kf2"/>
+                                            <outlet property="noteLabel" destination="cWq-5O-SU7" id="97e-7a-Udx"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -317,6 +286,14 @@
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyx-9g-RkO">
+                                <rect key="frame" x="20" y="753" width="74" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" image="pencil" catalog="system" title="Note" cornerStyle="capsule"/>
+                                <connections>
+                                    <action selector="noteTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4cA-bb-Aeb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -330,11 +307,13 @@
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L1V-gP-UeE"/>
                             <constraint firstItem="unl-fw-rKF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XSu-PQ-gKT"/>
                             <constraint firstItem="XtO-cC-nfp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xz8-9z-9Ht"/>
+                            <constraint firstItem="eyx-9g-RkO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ZsB-xm-iDo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YLv-30-FDh" secondAttribute="bottom" constant="12" id="bti-bX-6iY"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eG3-hl-DAJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YLv-30-FDh" secondAttribute="trailing" constant="20" id="hd3-vG-3zl"/>
                             <constraint firstItem="YLv-30-FDh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="iwT-Jz-vSv"/>
                             <constraint firstItem="X62-8I-YhD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="plD-VZ-jui"/>
+                            <constraint firstItem="eyx-9g-RkO" firstAttribute="centerY" secondItem="X62-8I-YhD" secondAttribute="centerY" id="ppg-uG-qwy"/>
                             <constraint firstItem="dc9-w9-uQn" firstAttribute="top" secondItem="XtO-cC-nfp" secondAttribute="bottom" constant="20" id="t00-lX-Eec"/>
                         </constraints>
                     </view>
@@ -354,9 +333,10 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="pig" width="748" height="1198"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

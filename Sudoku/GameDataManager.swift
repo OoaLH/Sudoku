@@ -9,37 +9,32 @@ import Foundation
 
 class GameDataManager {
     static let shared = GameDataManager()
-    var collection = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    var mapToCollection = Array(repeating: 0, count: 9)
-    var shouldDisplay = Array(repeating: 0, count: 81)
+    
+    var numberMapping = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    var numbersToDisplay = Array(repeating: 0, count: 81)
     var emptyNum = 81
     
     private init() {}
     
     func refreshData() {
-        collection = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        mapToCollection = Array(repeating: 0, count: 9)
+        numberMapping = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         emptyNum = 81
     }
     
     func generateData() {
-        let random = Int(arc4random_uniform(UInt32(number.count)))
-        shouldDisplay = number[random]
+        let random = Int(arc4random_uniform(UInt32(GameConstants.numbers.count)))
+        numbersToDisplay = GameConstants.numbers[random]
         
-        for i in 0..<9 {
-            let num = Int(arc4random_uniform(UInt32(9 - i)))
-            mapToCollection[i] = collection[num]
-            collection.remove(at: num)
-        }
+        numberMapping.shuffle()
         
         for i in 0..<81 {
-            if shouldDisplay[i] != 0 {
-                shouldDisplay[i] = mapToCollection[shouldDisplay[i] - 1]
+            if numbersToDisplay[i] != 0 {
+                numbersToDisplay[i] = numberMapping[numbersToDisplay[i] - 1]
                 emptyNum -= 1
             }
             else {
                 if Int(arc4random_uniform(UInt32(81))) < 5 {
-                    shouldDisplay[i] = mapToCollection[solution[i] - 1]
+                    numbersToDisplay[i] = numberMapping[GameConstants.solution[i] - 1]
                     emptyNum -= 1
                 }
             }
@@ -73,17 +68,17 @@ class GameDataManager {
     func converseRow(row1: Int, row2: Int) {
         for i in row1 * 9..<row1 * 9 + 9 {
             let j = i + (row2 - row1) * 9
-            let k = shouldDisplay[i]
-            shouldDisplay[i] = shouldDisplay[j]
-            shouldDisplay[j] = k
+            let k = numbersToDisplay[i]
+            numbersToDisplay[i] = numbersToDisplay[j]
+            numbersToDisplay[j] = k
         }
     }
     
     func converseLine(line1: Int, line2: Int) {
         for i in 0..<9 {
-            let k = shouldDisplay[i * 9 + line1]
-            shouldDisplay[i * 9 + line1] = shouldDisplay[i * 9 + line2]
-            shouldDisplay[i * 9 + line2] = k
+            let k = numbersToDisplay[i * 9 + line1]
+            numbersToDisplay[i * 9 + line1] = numbersToDisplay[i * 9 + line2]
+            numbersToDisplay[i * 9 + line2] = k
         }
     }
     
@@ -105,54 +100,46 @@ class GameDataManager {
         
         for x in 0..<81 {
             if (x / 9 == i || x % 9 == j) && (x != place) {
-                if shouldDisplay[place] == shouldDisplay[x] {
+                if numbersToDisplay[place] == numbersToDisplay[x] {
                     return false
                 }
             }
         }
         
         if (i == 0 || i == 3 || i == 6 ) && (j == 0 || j == 3 || j == 6) {
-            if shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 11] || shouldDisplay[place] == shouldDisplay[place + 19] || shouldDisplay[place] == shouldDisplay[place + 20] {
+            if numbersToDisplay[place] == numbersToDisplay[place + 10] || numbersToDisplay[place] == numbersToDisplay[place + 11] || numbersToDisplay[place] == numbersToDisplay[place + 19] || numbersToDisplay[place] == numbersToDisplay[place + 20] {
                 return false
             }
-        }
-        else if (i == 0 || i == 3 || i == 6) && (j == 1 || j == 4 || j == 7) {
-            if shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 17] || shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place + 19] {
+        } else if (i == 0 || i == 3 || i == 6) && (j == 1 || j == 4 || j == 7) {
+            if numbersToDisplay[place] == numbersToDisplay[place + 10] || numbersToDisplay[place] == numbersToDisplay[place + 17] || numbersToDisplay[place] == numbersToDisplay[place + 8] || numbersToDisplay[place] == numbersToDisplay[place + 19] {
                 return false
             }
-        }
-        else if (i == 0 || i == 3 || i == 6) && (j == 2 || j == 5 || j == 8) {
-            if shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place + 17] || shouldDisplay[place] == shouldDisplay[place + 7] || shouldDisplay[place] == shouldDisplay[place + 16] {
+        } else if (i == 0 || i == 3 || i == 6) && (j == 2 || j == 5 || j == 8) {
+            if numbersToDisplay[place] == numbersToDisplay[place + 8] || numbersToDisplay[place] == numbersToDisplay[place + 17] || numbersToDisplay[place] == numbersToDisplay[place + 7] || numbersToDisplay[place] == numbersToDisplay[place + 16] {
                 return false
             }
-        }
-        else if (i == 1 || i == 4 || i == 7) && (j == 0 || j == 3 || j == 6) {
-            if shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 7] || shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 11] {
+        } else if (i == 1 || i == 4 || i == 7) && (j == 0 || j == 3 || j == 6) {
+            if numbersToDisplay[place] == numbersToDisplay[place - 8] || numbersToDisplay[place] == numbersToDisplay[place - 7] || numbersToDisplay[place] == numbersToDisplay[place + 10] || numbersToDisplay[place] == numbersToDisplay[place + 11] {
                 return false
             }
-        }
-        else if (i == 1 || i == 4 || i == 7) && (j == 1 || j == 4 || j == 7) {
-            if shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 10] {
+        } else if (i == 1 || i == 4 || i == 7) && (j == 1 || j == 4 || j == 7) {
+            if numbersToDisplay[place] == numbersToDisplay[place + 10] || numbersToDisplay[place] == numbersToDisplay[place + 8] || numbersToDisplay[place] == numbersToDisplay[place - 8] || numbersToDisplay[place] == numbersToDisplay[place - 10] {
                 return false
             }
-        }
-        else if (i == 1 || i == 4 || i == 7) && (j == 2 || j == 5 || j == 8) {
-            if shouldDisplay[place] == shouldDisplay[place + 7] || shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place - 11] || shouldDisplay[place] == shouldDisplay[place - 10] {
+        } else if (i == 1 || i == 4 || i == 7) && (j == 2 || j == 5 || j == 8) {
+            if numbersToDisplay[place] == numbersToDisplay[place + 7] || numbersToDisplay[place] == numbersToDisplay[place + 8] || numbersToDisplay[place] == numbersToDisplay[place - 11] || numbersToDisplay[place] == numbersToDisplay[place - 10] {
                 return false
             }
-        }
-        else if (i == 2 || i == 5 || i == 8) && (j == 2 || j == 5 || j == 8) {
-            if shouldDisplay[place] == shouldDisplay[place - 20] || shouldDisplay[place] == shouldDisplay[place - 19] || shouldDisplay[place] == shouldDisplay[place - 11] || shouldDisplay[place] == shouldDisplay[place - 10] {
+        } else if (i == 2 || i == 5 || i == 8) && (j == 2 || j == 5 || j == 8) {
+            if numbersToDisplay[place] == numbersToDisplay[place - 20] || numbersToDisplay[place] == numbersToDisplay[place - 19] || numbersToDisplay[place] == numbersToDisplay[place - 11] || numbersToDisplay[place] == numbersToDisplay[place - 10] {
                 return false
             }
-        }
-        else if (i == 2 || i == 5 || i == 8) && (j == 1 || j == 4 || j == 7) {
-            if shouldDisplay[place] == shouldDisplay[place - 17] || shouldDisplay[place] == shouldDisplay[place - 19] || shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 10] {
+        } else if (i == 2 || i == 5 || i == 8) && (j == 1 || j == 4 || j == 7) {
+            if numbersToDisplay[place] == numbersToDisplay[place - 17] || numbersToDisplay[place] == numbersToDisplay[place - 19] || numbersToDisplay[place] == numbersToDisplay[place - 8] || numbersToDisplay[place] == numbersToDisplay[place - 10] {
                 return false
             }
-        }
-        else if (i == 2 || i == 5 || i == 8) && (j == 0 || j == 3 || j == 6) {
-            if shouldDisplay[place] == shouldDisplay[place - 7] || shouldDisplay[place] == shouldDisplay[place - 17] || shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 16] {
+        } else if (i == 2 || i == 5 || i == 8) && (j == 0 || j == 3 || j == 6) {
+            if numbersToDisplay[place] == numbersToDisplay[place - 7] || numbersToDisplay[place] == numbersToDisplay[place - 17] || numbersToDisplay[place] == numbersToDisplay[place - 8] || numbersToDisplay[place] == numbersToDisplay[place - 16] {
                 return false
             }
         }
