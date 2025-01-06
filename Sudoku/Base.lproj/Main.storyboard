@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cJN-gP-xtA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cJN-gP-xtA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -18,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sudoku" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iac-PS-yiB">
-                                <rect key="frame" x="107" y="124" width="200" height="40"/>
+                                <rect key="frame" x="107" y="128" width="200" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="n0Z-Ke-YEr"/>
                                     <constraint firstAttribute="height" constant="40" id="yDx-R9-jn8"/>
@@ -41,7 +43,7 @@
                                             <color key="titleColor" systemColor="systemOrangeColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="ebH-0z-72s"/>
+                                            <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ebH-0z-72s"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9M-Zj-YL3">
@@ -89,7 +91,7 @@
                                 </subviews>
                             </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pig" translatesAutoresizingMaskIntoConstraints="NO" id="DoN-lP-ojv">
-                                <rect key="frame" x="84.5" y="184" width="245" height="422"/>
+                                <rect key="frame" x="86" y="188" width="242" height="418"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="DoN-lP-ojv" secondAttribute="height" multiplier="40:69" id="lEx-D7-ftW"/>
                                 </constraints>
@@ -134,20 +136,20 @@
             <objects>
                 <viewController id="J7s-m5-mzv" customClass="InstructionViewController" customModule="Sudoku" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jIB-Gv-vVQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lkx-hy-Lje">
-                                <rect key="frame" x="20" y="20" width="172" height="41"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                <rect key="frame" x="20" y="20" width="156" height="50"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="31"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CI1-kH-c2U">
-                                <rect key="frame" x="20" y="81" width="374" height="707"/>
+                                <rect key="frame" x="20" y="90" width="374" height="776"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -180,7 +182,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YLv-30-FDh">
-                                <rect key="frame" x="20" y="808.5" width="374" height="41.5"/>
+                                <rect key="frame" x="20" y="842.5" width="374" height="41.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YLv-30-FDh" secondAttribute="height" multiplier="9:1" id="iGb-z6-Y3x"/>
@@ -275,7 +277,7 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X62-8I-YhD">
-                                <rect key="frame" x="132" y="748.5" width="150" height="40"/>
+                                <rect key="frame" x="132" y="782.5" width="150" height="40"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="1" blue="0.58039215686274503" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ql6-Bm-aQy"/>
@@ -290,45 +292,59 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtO-cC-nfp">
-                                <rect key="frame" x="132" y="160" width="150" height="40"/>
+                                <rect key="frame" x="132" y="161" width="150" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Fgm-8l-aIF"/>
                                     <constraint firstAttribute="width" constant="150" id="zl1-or-efS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="25"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unl-fw-rKF">
-                                <rect key="frame" x="0.0" y="44" width="40" height="40"/>
+                                <rect key="frame" x="334" y="0.0" width="80" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="C8Z-Ra-lc2"/>
-                                    <constraint firstAttribute="width" constant="40" id="h20-dq-Zze"/>
+                                    <constraint firstAttribute="height" constant="80" id="C8Z-Ra-lc2"/>
+                                    <constraint firstAttribute="width" constant="80" id="h20-dq-Zze"/>
                                 </constraints>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
-                                <state key="normal" image="chevron.backward" catalog="system"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                                </state>
                                 <connections>
                                     <action selector="back:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oji-PR-dkd"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-w9-uQn">
-                                <rect key="frame" x="189.5" y="220" width="35.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="186.5" y="221" width="41" height="20"/>
+                                <fontDescription key="fontDescription" name="CourierNewPS-BoldMT" family="Courier New" pointSize="17"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tyf-Rl-vru">
+                                <rect key="frame" x="370" y="782.5" width="24" height="40"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="trash.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aPV-8q-s6Y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Npr-WP-mpn" secondAttribute="trailing" constant="20" id="0Dc-EY-rRy"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0c2-fZ-Dzp"/>
-                            <constraint firstItem="unl-fw-rKF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="8Fs-ke-GlB"/>
+                            <constraint firstItem="unl-fw-rKF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="8Fs-ke-GlB"/>
                             <constraint firstItem="dc9-w9-uQn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="A4r-QY-9Dw"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="top" secondItem="dc9-w9-uQn" secondAttribute="bottom" constant="20" id="CVl-fk-AuV"/>
                             <constraint firstItem="X62-8I-YhD" firstAttribute="bottom" secondItem="YLv-30-FDh" secondAttribute="top" constant="-20" id="DeH-f9-TWm"/>
+                            <constraint firstItem="Tyf-Rl-vru" firstAttribute="bottom" secondItem="X62-8I-YhD" secondAttribute="bottom" id="Koz-VY-SxK"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L1V-gP-UeE"/>
+                            <constraint firstItem="Tyf-Rl-vru" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-20" id="Nkb-Sk-BKt"/>
                             <constraint firstItem="unl-fw-rKF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XSu-PQ-gKT"/>
+                            <constraint firstItem="Tyf-Rl-vru" firstAttribute="top" secondItem="X62-8I-YhD" secondAttribute="top" id="XVb-Yt-ahz"/>
                             <constraint firstItem="XtO-cC-nfp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xz8-9z-9Ht"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YLv-30-FDh" secondAttribute="bottom" constant="12" id="bti-bX-6iY"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eG3-hl-DAJ"/>
@@ -353,8 +369,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="pig" width="748" height="1198"/>
+        <image name="trash.fill" catalog="system" width="117" height="128"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -8,154 +8,172 @@
 import Foundation
 
 class GameDataManager {
+    
     static let shared = GameDataManager()
-    var collection = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    var mapToCollection = Array(repeating: 0, count: 9)
-    var shouldDisplay = Array(repeating: 0, count: 81)
-    var emptyNum = 81
+    
+    var solution: [[Int]] = []
+    var sudoku: [[GamePadCellModel]] = []
+    var flattenedSudoku: [GamePadCellModel] = []
     
     private init() {}
     
-    func refreshData() {
-        collection = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        mapToCollection = Array(repeating: 0, count: 9)
-        emptyNum = 81
-    }
-    
     func generateData() {
-        let random = Int(arc4random_uniform(UInt32(number.count)))
-        shouldDisplay = number[random]
+        solution = GameConstants.solution
+        sudoku = []
+        flattenedSudoku = []
         
-        for i in 0..<9 {
-            let num = Int(arc4random_uniform(UInt32(9 - i)))
-            mapToCollection[i] = collection[num]
-            collection.remove(at: num)
-        }
+        generateRandomMapping()
+        swap()
         
-        for i in 0..<81 {
-            if shouldDisplay[i] != 0 {
-                shouldDisplay[i] = mapToCollection[shouldDisplay[i] - 1]
-                emptyNum -= 1
+        for row in 0..<9 {
+            var tempRow: [GamePadCellModel] = []
+            for col in 0..<9 {
+                let block = (row / 3) * 3 + col / 3
+                let model = GamePadCellModel(number: solution[row][col], row: row, column: col, block: block)
+                tempRow.append(model)
+                flattenedSudoku.append(model)
             }
-            else {
-                if Int(arc4random_uniform(UInt32(81))) < 5 {
-                    shouldDisplay[i] = mapToCollection[solution[i] - 1]
-                    emptyNum -= 1
-                }
-            }
+            sudoku.append(tempRow)
         }
-        var row1 = Int(arc4random_uniform(3) + 3)
-        var row2 = Int(arc4random_uniform(3) + 3)
-        var line1 = Int(arc4random_uniform(3) + 3)
-        var line2 = Int(arc4random_uniform(3) + 3)
-        converseRow(row1: row1, row2: row2)
-        converseLine(line1: line1, line2: line2)
-        row1 = Int(arc4random_uniform(3))
-        row2 = Int(arc4random_uniform(3))
-        line1 = Int(arc4random_uniform(3))
-        line2 = Int(arc4random_uniform(3))
-        converseRow(row1: row1, row2: row2)
-        converseLine(line1: line1, line2: line2)
-        row1 = Int(arc4random_uniform(3) + 6)
-        row2 = Int(arc4random_uniform(3) + 6)
-        line1 = Int(arc4random_uniform(3) + 6)
-        line2 = Int(arc4random_uniform(3) + 6)
-        converseRow(row1: row1, row2: row2)
-        converseLine(line1: line1, line2: line2)
-        row1 = Int(arc4random_uniform(3))
-        row2 = Int(arc4random_uniform(3))
-        line1 = Int(arc4random_uniform(3))
-        line2 = Int(arc4random_uniform(3))
-        converseBlockInLine(line1: line1, line2: line2)
-        converseBlockInRow(row1: row1, row2: row2)
-    }
-    
-    func converseRow(row1: Int, row2: Int) {
-        for i in row1 * 9..<row1 * 9 + 9 {
-            let j = i + (row2 - row1) * 9
-            let k = shouldDisplay[i]
-            shouldDisplay[i] = shouldDisplay[j]
-            shouldDisplay[j] = k
-        }
-    }
-    
-    func converseLine(line1: Int, line2: Int) {
-        for i in 0..<9 {
-            let k = shouldDisplay[i * 9 + line1]
-            shouldDisplay[i * 9 + line1] = shouldDisplay[i * 9 + line2]
-            shouldDisplay[i * 9 + line2] = k
-        }
-    }
-    
-    func converseBlockInLine(line1: Int, line2: Int) {
-        converseLine(line1: 3 * line1 + 1, line2: 3 * line2 + 1)
-        converseLine(line1: 3 * line1 + 2, line2: 3 * line2 + 2)
-        converseLine(line1: 3 * line1, line2: 3 * line2)
-    }
-    
-    func converseBlockInRow(row1: Int, row2: Int) {
-        converseRow(row1: 3 * row1 + 1, row2: 3 * row2 + 1)
-        converseRow(row1: 3 * row1 + 2, row2: 3 * row2 + 2)
-        converseRow(row1: 3 * row1, row2: 3 * row2)
-    }
-    
-    func checkForPlacement(place: Int) -> Bool {
-        let i = place / 9
-        let j = place % 9
         
-        for x in 0..<81 {
-            if (x / 9 == i || x % 9 == j) && (x != place) {
-                if shouldDisplay[place] == shouldDisplay[x] {
-                    return false
-                }
+        removeSingleNumbers()
+//        removeRandomNumbers()
+    }
+    
+    func checkPlacement(index: Int) -> Bool {
+        let model = flattenedSudoku[index]
+        
+        for otherModel in sudoku[model.row] {
+            if model.column != otherModel.column,
+               model.number == otherModel.number {
+                return false
             }
         }
         
-        if (i == 0 || i == 3 || i == 6 ) && (j == 0 || j == 3 || j == 6) {
-            if shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 11] || shouldDisplay[place] == shouldDisplay[place + 19] || shouldDisplay[place] == shouldDisplay[place + 20] {
+        let columnModels = sudoku.map {
+            $0[model.column]
+        }
+        for otherModel in columnModels {
+            if model.row != otherModel.row,
+               model.number == otherModel.number {
                 return false
             }
         }
-        else if (i == 0 || i == 3 || i == 6) && (j == 1 || j == 4 || j == 7) {
-            if shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 17] || shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place + 19] {
+        
+        let blockModels = flattenedSudoku.filter {
+            $0.block == model.block
+        }
+        for otherModel in blockModels {
+            if model.row != otherModel.row || model.column != otherModel.column,
+               model.number == otherModel.number {
                 return false
             }
         }
-        else if (i == 0 || i == 3 || i == 6) && (j == 2 || j == 5 || j == 8) {
-            if shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place + 17] || shouldDisplay[place] == shouldDisplay[place + 7] || shouldDisplay[place] == shouldDisplay[place + 16] {
-                return false
-            }
-        }
-        else if (i == 1 || i == 4 || i == 7) && (j == 0 || j == 3 || j == 6) {
-            if shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 7] || shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 11] {
-                return false
-            }
-        }
-        else if (i == 1 || i == 4 || i == 7) && (j == 1 || j == 4 || j == 7) {
-            if shouldDisplay[place] == shouldDisplay[place + 10] || shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 10] {
-                return false
-            }
-        }
-        else if (i == 1 || i == 4 || i == 7) && (j == 2 || j == 5 || j == 8) {
-            if shouldDisplay[place] == shouldDisplay[place + 7] || shouldDisplay[place] == shouldDisplay[place + 8] || shouldDisplay[place] == shouldDisplay[place - 11] || shouldDisplay[place] == shouldDisplay[place - 10] {
-                return false
-            }
-        }
-        else if (i == 2 || i == 5 || i == 8) && (j == 2 || j == 5 || j == 8) {
-            if shouldDisplay[place] == shouldDisplay[place - 20] || shouldDisplay[place] == shouldDisplay[place - 19] || shouldDisplay[place] == shouldDisplay[place - 11] || shouldDisplay[place] == shouldDisplay[place - 10] {
-                return false
-            }
-        }
-        else if (i == 2 || i == 5 || i == 8) && (j == 1 || j == 4 || j == 7) {
-            if shouldDisplay[place] == shouldDisplay[place - 17] || shouldDisplay[place] == shouldDisplay[place - 19] || shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 10] {
-                return false
-            }
-        }
-        else if (i == 2 || i == 5 || i == 8) && (j == 0 || j == 3 || j == 6) {
-            if shouldDisplay[place] == shouldDisplay[place - 7] || shouldDisplay[place] == shouldDisplay[place - 17] || shouldDisplay[place] == shouldDisplay[place - 8] || shouldDisplay[place] == shouldDisplay[place - 16] {
-                return false
-            }
-        }
+        
         return true
+    }
+    
+    private func removeSingleNumbers() {
+        let models = flattenedSudoku.shuffled()
+        for model in models {
+            let rowNumbers = sudoku[model.row].map {
+                $0.number
+            }
+            let columnNumbers = sudoku.map {
+                $0[model.column]
+            }.map {
+                $0.number
+            }
+            let blockNumbers = models.filter {
+                $0.block == model.block
+            }.map {
+                $0.number
+            }
+            let existings = Set(
+                (rowNumbers + columnNumbers + blockNumbers).filter {
+                    $0 != 0 && $0 != model.number
+                }
+            )
+            if existings.count == 8 {
+                model.number = 0
+                model.status = .empty
+            }
+        }
+    }
+    
+    private func removeRandomNumbers() {
+        let models = flattenedSudoku.shuffled()
+        models.prefix(upTo: 10).forEach { model in
+            guard model.number != 0 else {
+                return
+            }
+            let original = model.number
+            var possibilities = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+            possibilities.remove(at: original - 1)
+            for number in possibilities {
+                model.number = number
+                
+            }
+        }
+    }
+    
+    private func solve() {
+        
+    }
+    
+    private func generateRandomMapping() {
+        let mapping = [1, 2, 3, 4, 5, 6, 7, 8, 9].shuffled()
+        for row in 0..<9 {
+            for col in 0..<9 {
+                let original = solution[row][col]
+                solution[row][col] = mapping[original - 1]
+            }
+        }
+    }
+    
+    private func swap() {
+        for offset in [0, 3, 6] {
+            let row1 = Int(arc4random_uniform(3) + UInt32(offset))
+            let row2 = Int(arc4random_uniform(3) + UInt32(offset))
+            let col1 = Int(arc4random_uniform(3) + UInt32(offset))
+            let col2 = Int(arc4random_uniform(3) + UInt32(offset))
+            swapRow(row1: row1, row2: row2)
+            swapColumn(col1: col1, col2: col2)
+        }
+        
+        let row1 = Int(arc4random_uniform(3))
+        let row2 = Int(arc4random_uniform(3))
+        let col1 = Int(arc4random_uniform(3))
+        let col2 = Int(arc4random_uniform(3))
+        swapBlockInColumn(col1: col1, col2: col2)
+        swapBlockInRow(row1: row1, row2: row2)
+    }
+    
+    private func swapRow(row1: Int, row2: Int) {
+        for col in 0..<9 {
+            let temp = solution[row1][col]
+            solution[row1][col] = solution[row2][col]
+            solution[row2][col] = temp
+        }
+    }
+    
+    private func swapColumn(col1: Int, col2: Int) {
+        for row in 0..<9 {
+            let temp = solution[row][col1]
+            solution[row][col1] = solution[row][col2]
+            solution[row][col2] = temp
+        }
+    }
+    
+    private func swapBlockInColumn(col1: Int, col2: Int) {
+        swapColumn(col1: 3 * col1 + 1, col2: 3 * col2 + 1)
+        swapColumn(col1: 3 * col1 + 2, col2: 3 * col2 + 2)
+        swapColumn(col1: 3 * col1, col2: 3 * col2)
+    }
+    
+    private func swapBlockInRow(row1: Int, row2: Int) {
+        swapRow(row1: 3 * row1 + 1, row2: 3 * row2 + 1)
+        swapRow(row1: 3 * row1 + 2, row2: 3 * row2 + 2)
+        swapRow(row1: 3 * row1, row2: 3 * row2)
     }
 }

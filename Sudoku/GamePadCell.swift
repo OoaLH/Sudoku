@@ -7,44 +7,30 @@
 
 import UIKit
 
-enum GamePadCellStatus {
-    case displayedAtBeginning
-    case filled
-    case wrong
-    case empty
-}
-
-protocol GamePadCellDelegate: class {
-    func selectGamePad(index: Int)
+protocol GamePadCellDelegate: AnyObject {
+    
+    func didSelectGamePad(index: Int)
 }
 
 class GamePadCell: UICollectionViewCell {
-    var index: Int = 0
-    weak var delegate: GamePadCellDelegate?
-    var status: GamePadCellStatus = .empty {
+    
+    var model: GamePadCellModel? {
         didSet {
-            switch status {
-            case .displayedAtBeginning:
-                button.setTitleColor(UIColor.black, for: .normal)
-            case .wrong:
-                button.setTitleColor(UIColor.red, for: .normal)
-            case .empty:
-                displayedNum = 0
-                button.setTitleColor(UIColor.systemOrange, for: .normal)
-                button.setTitle("", for: .normal)
-            case .filled:
-                button.setTitleColor(UIColor.systemOrange, for: .normal)
+            guard let model else {
+                return
+            }
+            
+            modelDidChange()
+            
+            model.statusDidChange = { [weak self] in
+                self?.modelDidChange()
             }
         }
     }
     
-    var displayedNum: Int = 0 {
-        didSet {
-            if displayedNum != 0 {
-                button.setTitle(String(displayedNum), for: .normal)
-            }
-        }
-    }
+    var index: Int = 0
+    
+    weak var delegate: GamePadCellDelegate?
     
     override var isSelected: Bool {
         didSet {
@@ -61,6 +47,23 @@ class GamePadCell: UICollectionViewCell {
     @IBOutlet weak var button: UIButton!
     
     @IBAction func selectGamePad(_ sender: UIButton) {
-        delegate?.selectGamePad(index: index)
+        delegate?.didSelectGamePad(index: index)
+    }
+    
+    private func modelDidChange() {
+        guard let model else {
+            return
+        }
+        switch model.status {
+        case .displayedAtBeginning:
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.setTitle(String(model.number), for: .normal)
+        case .empty:
+            button.setTitleColor(UIColor.systemOrange, for: .normal)
+            button.setTitle("", for: .normal)
+        case .filled:
+            button.setTitleColor(UIColor.systemOrange, for: .normal)
+            button.setTitle(String(model.number), for: .normal)
+        }
     }
 }

@@ -7,22 +7,19 @@
 
 import UIKit
 
-protocol NumPadCellDelegate: class {
+protocol NumPadCellDelegate: AnyObject {
+    
     func fillNum(num: Int)
 }
 
 class NumPadCell: UICollectionViewCell {
+    
     weak var delegate: NumPadCellDelegate?
-    var displayedNum: Int = 0 {
-        didSet {
-            button.setTitle(String(displayedNum), for: .normal)
-        }
-    }
     
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                backgroundColor = UIColor(red: 238/255, green: 1, blue: 148/255, alpha: 1)//EEFF94
+                backgroundColor = UIColor(red: 238/255, green: 1, blue: 148/255, alpha: 1) //EEFF94
                 button.setTitleColor(UIColor.systemOrange, for: .normal)
             }
             else {
@@ -32,7 +29,14 @@ class NumPadCell: UICollectionViewCell {
         }
     }
     
-    func configureViews() {
+    var displayedNum: Int = 0 {
+        didSet {
+            button.setTitle(String(displayedNum), for: .normal)
+        }
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         layer.cornerRadius = 2
     }
     
