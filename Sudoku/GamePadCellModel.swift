@@ -34,4 +34,8 @@ class GamePadCellModel {
         self.column = column
         self.block = block
     }
+    
+    func copy() -> GamePadCellModel {
+        return GamePadCellModel(number: number, row: row, column: column, block: block)
+    }
 }

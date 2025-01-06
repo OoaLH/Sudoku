@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var timerLabel: UILabel!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let row1 = UIView()
     let row2 = UIView()
@@ -39,8 +40,7 @@ class ViewController: UIViewController {
         didSet {
             if wrongTime == 3 {
                 lose()
-            }
-            else {
+            } else {
                 textLabel.text = "Wrong: " + String(wrongTime)
             }
         }
@@ -86,21 +86,29 @@ class ViewController: UIViewController {
         wrongTime = 0
         
         gamePad.isHidden = true
-        GameDataManager.shared.generateData()
-        gamePad.reloadData()
-        gamePad.isHidden = false
+        activityIndicator.startAnimating()
         
-        textLabel.text = "Started!"
+        textLabel.text = "Generating Sudoku..."
         textLabel.textColor = UIColor.systemGreen
         
-        gamePad.isUserInteractionEnabled = true
-        numPad.isUserInteractionEnabled = true
-        
-        selectedGamePadIndex = nil
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
-            self?.time += 1
-        })
+        GameDataManager.shared.generateData { [unowned self] in
+            activityIndicator.stopAnimating()
+            
+            gamePad.reloadData()
+            gamePad.isHidden = false
+            
+            textLabel.text = "Started!"
+            
+            gamePad.isUserInteractionEnabled = true
+            numPad.isUserInteractionEnabled = true
+            
+            selectedGamePadIndex = nil
+            
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] (timer) in
+                self?.time += 1
+            })
+            
+        }
     }
     
     func win() {
@@ -186,7 +194,7 @@ class ViewController: UIViewController {
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == gamePad {
-            return GameDataManager.shared.flattenedSudoku.count
+            return GameDataManager.shared.gameData.count
         } else {
             return 9
         }
@@ -195,7 +203,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == gamePad {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Game", for: indexPath) as! GamePadCell
-            cell.model = GameDataManager.shared.flattenedSudoku[indexPath.item]
+            cell.model = GameDataManager.shared.gameData[indexPath.item]
             cell.index = indexPath.row
             cell.delegate = self
             return cell
@@ -241,13 +249,13 @@ extension ViewController: NumPadCellDelegate {
             return
         }
 
-        let oldNum = GameDataManager.shared.flattenedSudoku[index].number
-        GameDataManager.shared.flattenedSudoku[index].number = num
+        let oldNum = GameDataManager.shared.gameData[index].number
+        GameDataManager.shared.gameData[index].number = num
         
         if GameDataManager.shared.checkPlacement(index: index) {
             cell.model?.status = .filled
             
-            let empty = GameDataManager.shared.flattenedSudoku.filter {
+            let empty = GameDataManager.shared.gameData.filter {
                 $0.number == 0
             }.count
             if empty == 0 {

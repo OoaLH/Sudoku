@@ -292,10 +292,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtO-cC-nfp">
-                                <rect key="frame" x="132" y="161" width="150" height="40"/>
+                                <rect key="frame" x="20" y="161" width="374" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Fgm-8l-aIF"/>
-                                    <constraint firstAttribute="width" constant="150" id="zl1-or-efS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="25"/>
                                 <color key="textColor" systemColor="systemGreenColor"/>
@@ -330,6 +329,10 @@
                                     <action selector="deleteNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aPV-8q-s6Y"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="qOD-6S-qSb">
+                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -346,6 +349,7 @@
                             <constraint firstItem="unl-fw-rKF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="XSu-PQ-gKT"/>
                             <constraint firstItem="Tyf-Rl-vru" firstAttribute="top" secondItem="X62-8I-YhD" secondAttribute="top" id="XVb-Yt-ahz"/>
                             <constraint firstItem="XtO-cC-nfp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Xz8-9z-9Ht"/>
+                            <constraint firstItem="XtO-cC-nfp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Yff-Tt-w9O"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="YLv-30-FDh" secondAttribute="bottom" constant="12" id="bti-bX-6iY"/>
                             <constraint firstItem="Npr-WP-mpn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="eG3-hl-DAJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YLv-30-FDh" secondAttribute="trailing" constant="20" id="hd3-vG-3zl"/>
@@ -356,6 +360,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="TtY-Jh-WmH"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="qOD-6S-qSb" id="Sqt-l3-rfq"/>
                         <outlet property="gamePad" destination="Npr-WP-mpn" id="eX6-Z2-0S0"/>
                         <outlet property="numPad" destination="YLv-30-FDh" id="tA5-Kc-6OF"/>
                         <outlet property="startButton" destination="X62-8I-YhD" id="wAC-Zg-8uj"/>

@@ -11,33 +11,43 @@ class GameDataManager {
     
     static let shared = GameDataManager()
     
-    var solution: [[Int]] = []
-    var sudoku: [[GamePadCellModel]] = []
-    var flattenedSudoku: [GamePadCellModel] = []
+    private var solution: [[Int]] = []
+    private var sudoku: [[GamePadCellModel]] = []
+    private var flattenedSudoku: [GamePadCellModel] = []
+    
+    var gameData: [GamePadCellModel] = []
     
     private init() {}
     
-    func generateData() {
-        solution = GameConstants.solution
-        sudoku = []
-        flattenedSudoku = []
-        
-        generateRandomMapping()
-        swap()
-        
-        for row in 0..<9 {
-            var tempRow: [GamePadCellModel] = []
-            for col in 0..<9 {
-                let block = (row / 3) * 3 + col / 3
-                let model = GamePadCellModel(number: solution[row][col], row: row, column: col, block: block)
-                tempRow.append(model)
-                flattenedSudoku.append(model)
+    func generateData(completionHandler: @escaping (() -> Void)) {
+        DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+            solution = GameConstants.solution
+            sudoku = []
+            flattenedSudoku = []
+            gameData = []
+            
+            generateRandomMapping()
+            swap()
+            
+            for row in 0..<9 {
+                var tempRow: [GamePadCellModel] = []
+                for col in 0..<9 {
+                    let block = (row / 3) * 3 + col / 3
+                    let model = GamePadCellModel(number: solution[row][col], row: row, column: col, block: block)
+                    tempRow.append(model)
+                    flattenedSudoku.append(model)
+                }
+                sudoku.append(tempRow)
             }
-            sudoku.append(tempRow)
+            
+            removeSingleNumbers()
+            removeRandomNumbers()
+            
+            DispatchQueue.main.async { [unowned self] in
+                gameData = flattenedSudoku
+                completionHandler()
+            }
         }
-        
-        removeSingleNumbers()
-//        removeRandomNumbers()
     }
     
     func checkPlacement(index: Int) -> Bool {
@@ -102,22 +112,88 @@ class GameDataManager {
     }
     
     private func removeRandomNumbers() {
-        let models = flattenedSudoku.shuffled()
-        models.prefix(upTo: 10).forEach { model in
-            guard model.number != 0 else {
-                return
-            }
+        let models = flattenedSudoku
+            .shuffled()
+            .filter {
+            $0.number != 0
+        }
+        var removed = 0
+        for model in models {
             let original = model.number
             var possibilities = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             possibilities.remove(at: original - 1)
+            var canRemove = true
             for number in possibilities {
                 model.number = number
-                
+                if solve() {
+                    model.number = original
+                    canRemove = false
+                    break
+                }
+            }
+            if canRemove {
+                model.number = 0
+                model.status = .empty
+                removed += 1
+                if removed == 6 {
+                    break
+                }
             }
         }
     }
     
-    private func solve() {
+    private func solve() -> Bool {
+        let copied = flattenedSudoku.map { $0.copy() }
+        let vacants = copied.filter { $0.number == 0 }
+        var index = 0
+        while index > -1,
+              index < vacants.count {
+            let current = vacants[index]
+            var canFill = false
+            if current.number < 9 {
+                let range = (current.number + 1)...9
+                for number in range {
+                    let rowNumbers = copied.filter {
+                        $0.row == current.row
+                    }.map {
+                        $0.number
+                    }
+                    let columnNumbers = copied.filter {
+                        $0.column == current.column
+                    }.map {
+                        $0.number
+                    }
+                    let blockNumbers = copied.filter {
+                        $0.block == current.block
+                    }.map {
+                        $0.number
+                    }
+                    let existings = Set(
+                        (rowNumbers + columnNumbers + blockNumbers).filter {
+                            $0 != 0
+                        }
+                    )
+                    if !existings.contains(number) {
+                        current.number = number
+                        canFill = true
+                        break
+                    }
+                }
+            }
+            if !canFill {
+                current.number = 0
+                index -= 1
+            } else {
+                index += 1
+            }
+        }
+        if vacants.count == 0 {
+            return false
+        }
+        return index == vacants.count
+    }
+    
+    private func checkValid() {
         
     }
     
